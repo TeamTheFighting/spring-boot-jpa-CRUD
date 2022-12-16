@@ -6,10 +6,12 @@ import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 //Interceptor란 모든 URL 요청시 실행하는 전역 기능
 //Interceptor에서 세션값 체크
+@Component
 public class Interceptor implements HandlerInterceptor {
 
     private final Logger logger = LoggerFactory.getLogger(Interceptor.class);

@@ -12,4 +12,8 @@ public class PageController {
         return "login";
     }
 
+    @GetMapping("/home")
+    public String loadHomePage() {
+        return "index";
+    }
 }

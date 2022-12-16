@@ -29,13 +29,19 @@
         userId: userId,
         userPassword: userPassword,
       };
+      console.log(jsonData);
+
       $.ajax({
         url: '/api/v1/login',
         type: 'POST',
         contentType: 'application/json',
         data: JSON.stringify(jsonData),
         dataType: 'json',
-        success: function (response) {},
+        success: function (response) {
+          if (response) {
+            location.href = '/home';
+          }
+        },
       });
     }
   </script>
