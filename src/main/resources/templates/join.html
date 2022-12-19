@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>회원가입</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        background: linear-gradient(120deg, #2980b9, #8e44ad);
+        height: 100vh;
+        overflow: hidden;
+        box-sizing: border-box;
+      }
+
+      .container {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 400px;
+        background: white;
+        border-radius: 10px;
+      }
+
+      .container h1 {
+        text-align: center;
+        padding: 0 0 20px 0;
+        border-bottom: 1px solid silver;
+      }
+
+      .login-form {
+        padding: 0 40px;
+      }
+
+      .txt-field {
+        position: relative;
+        border-bottom: 2px solid #adadad;
+        margin: 30px 0;
+      }
+
+      .txt-field input {
+        width: 100%;
+        padding: 0 5px;
+        height: 40px;
+        font-size: 16px;
+        border: none;
+        outline: none;
+      }
+
+      .txt-field input:focus ~ label,
+      .txt-field input:valid ~ label {
+        top: -5px;
+        color: #2691d9;
+        transition: 0.5s;
+        font-size: 13px;
+      }
+
+      .txt-field label {
+        position: absolute;
+        top: 50%;
+        left: 5px;
+        color: #adadad;
+        transform: translateY(-50%);
+        font-size: 16px;
+        pointer-events: none;
+      }
+
+      .pass {
+        margin: -5px 0 20px 5px;
+        color: #a6a6a6;
+        cursor: pointer;
+      }
+
+      .pass:hover {
+        text-decoration: underline;
+      }
+
+      .login-btn {
+        width: 100%;
+        height: 50px;
+        border: 1px solid;
+        background: #2691d9;
+        border-radius: 25px;
+        font-size: 18px;
+        text-align: center;
+        color: white;
+        font-weight: 700;
+        cursor: pointer;
+        outline: none;
+      }
+
+      .signup-link {
+        margin: 30px 0;
+        text-align: center;
+        font-size: 16px;
+        color: #666666;
+      }
+
+      .signup-link a {
+        color: #2691d9;
+        text-decoration: none;
+      }
+
+      .signup-link a:hover {
+        text-decoration: underline;
+      }
+      .login-btn:hover {
+        transition: 1s;
+        background-color: #fff;
+        color: #2691d9;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Welcome to Spring!</h1>
+      <div class="login-form">
+        <div class="txt-field">
+          <input id="userId" type="text" required />
+          <label>*아이디</label>
+        </div>
+        <div class="txt-field">
+          <input id="userPassword" type="password" required />
+          <label>*비밀번호</label>
+        </div>
+        <div class="txt-field">
+          <input id="userRePassword" type="password" required />
+          <label>*비밀번호 재입력</label>
+        </div>
+        <div class="txt-field">
+          <input id="userEmail" type="email" required />
+          <label>*이메일</label>
+        </div>
+        <div class="pass">
+          <label for="login-status">[필수] 개인정보 수집 및 이용 동의</label>
+          <input type="checkbox" id="login-status" value="stay" />
+        </div>
+        <input class="login-btn" type="butten" value="Sign Up" onclick="" />
+        <div class="signup-link"></div>
+      </div>
+    </div>
+    <script
+      src="https://code.jquery.com/jquery-3.6.1.js"
+      integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI="
+      crossorigin="anonymous"
+    ></script>
+    <script></script>
+  </body>
+</html>

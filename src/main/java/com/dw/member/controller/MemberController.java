@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.dw.member.model.Member;
 import com.dw.member.repository.MemberRepo;
+import com.dw.member.service.MainService;
 
 //Rest == data 전달용!
 @RestController
@@ -23,6 +24,9 @@ public class MemberController {
 
 	@Autowired
 	MemberRepo repo;
+
+	@Autowired
+	MainService service;
 
 	@PostMapping("/api/v1/login")
 	public boolean callLogin(@RequestBody Member member, HttpServletRequest request) {
@@ -81,6 +85,17 @@ public class MemberController {
 		// 동일한 PK 값이 없으면 insert!
 		member = repo.save(member);
 		return member;
+	}
+
+	@PostMapping("/api/v1/valid-recaptcha")
+	public boolean validRecaptcha(HttpServletRequest request) {
+		boolean isResult = true;
+		String response = request.getParameter("g-recaptcha-response");
+		boolean isRecaptcha = service.verifyRecaptcha(response); // 인증 메소드 서비스로 분리
+		if (!isRecaptcha) {
+			isResult = false;
+		}
+		return isResult;
 	}
 
 }
