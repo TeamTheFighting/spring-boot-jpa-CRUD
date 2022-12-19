@@ -41,6 +41,11 @@ public class MemberController {
 		}
 	}
 
+	@PostMapping("/api/v1/login2")
+	public Member callLogin2() {
+		return null;
+	}
+
 	// 전체 조회
 	@GetMapping("/member")
 	public List<Member> callAllMembers() {
