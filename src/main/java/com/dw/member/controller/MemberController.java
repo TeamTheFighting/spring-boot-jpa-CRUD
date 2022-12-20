@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -41,9 +42,17 @@ public class MemberController {
 		}
 	}
 
-	@PostMapping("/api/v1/login2")
-	public Member callLogin2() {
-		return null;
+	// HTML에서 FROM 태그로 전송시 @ModelAttribute
+	@PostMapping(value = "/api/v1/login2")
+	public boolean callLogin2(@ModelAttribute Member member, HttpServletRequest request) {
+		Member m = repo.findByuserIdAndUserPassword(member.getUserId(), member.getUserPassword());
+		if (m != null) {
+			HttpSession session = request.getSession();// 세션 불러오기
+			session.setAttribute("userId", m.getUserId()); // 세션에 사용자 아이디 저장
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	// 전체 조회
