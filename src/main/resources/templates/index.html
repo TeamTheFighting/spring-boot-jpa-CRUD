@@ -4,13 +4,68 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/style.css" />
     <title>Document</title>
   </head>
   <body>
-    <div>개인정보 화면 입니다.</div>
-    <p>현상원 도사</p>
-    <p>나이 : 78</p>
-    <p>연락처 : 010-4097-****</p>
-    <p>주민등록번호 : 931207-1******</p>
+    <div class="container">
+      <div class="section-input">
+        <div class="card-header">
+          <h6>DW 게시판</h6>
+        </div>
+        <div class="btn-wrapper">
+          <button type="button" onclick="goPage()">게시물 등록</button>
+        </div>
+      </div>
+      <div class="section-table">
+        <div class="card-header">
+          <h6>게시물</h6>
+        </div>
+        <div class="card-body">
+          <div class="table-wrapper">
+            <div class="row"></div>
+            <div class="row">
+              <div class="col">
+                <table>
+                  <thead>
+                    <tr role="row">
+                      <th>
+                        No <i id="asc" class="bx bx-up-arrow-alt"></i
+                        ><i id="desc" class="bx bx-down-arrow-alt"></i>
+                      </th>
+                      <th>Title</th>
+                      <th>Writer</th>
+                      <th>CreateAt</th>
+                      <th>Count</th>
+                    </tr>
+                  </thead>
+                  <tbody id="data">
+                    <tr>
+                      <td>1</td>
+                      <td>
+                        <a href="#">네이마르 부상..? 크로아티아 승리?</a>
+                      </td>
+                      <td>현상원</td>
+                      <td>2015/12/09</td>
+                      <td>0</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- 페이징 처리하는 HTML -->
+    <div class="pagination">
+      <a>Previous</a>
+      <a>1</a>
+      <a>2</a>
+      <a>3</a>
+      <a>4</a>
+      <a>5</a>
+      <a>Next</a>
+    </div>
   </body>
 </html>

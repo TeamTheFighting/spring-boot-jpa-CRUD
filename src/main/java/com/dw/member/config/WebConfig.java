@@ -16,9 +16,8 @@ public class WebConfig implements WebMvcConfigurer {
     // addInterceptors : 인터셉터를 추가하는 함수 재정의
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        String[] patterns = { "/login", "/join", "/error", "/resources/static/*", "/api/v1/login", "/api/v1/login2" };// 인터셉터
-                                                                                                                      // 제외
-                                                                                                                      // URL
+        String[] patterns = { "/login", "/join", "/error", "/resources/static/*", "/api/v1/login",
+                "/api/v1/login-test" };
         registry.addInterceptor(interceptor).excludePathPatterns(patterns);
     }
 

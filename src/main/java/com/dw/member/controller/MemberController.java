@@ -29,7 +29,7 @@ public class MemberController {
 	@Autowired
 	MainService service;
 
-	@PostMapping("/api/v1/login")
+	@PostMapping("/api/v1/login-test")
 	public boolean callLogin(@RequestBody Member member, HttpServletRequest request) {
 
 		Member m = repo.findByuserIdAndUserPassword(member.getUserId(), member.getUserPassword());
@@ -43,7 +43,7 @@ public class MemberController {
 	}
 
 	// HTML에서 FROM 태그로 전송시 @ModelAttribute
-	@PostMapping(value = "/api/v1/login2")
+	@PostMapping(value = "/api/v1/login")
 	public boolean callLogin2(@ModelAttribute Member member, HttpServletRequest request) {
 		Member m = repo.findByuserIdAndUserPassword(member.getUserId(), member.getUserPassword());
 		if (m != null) {

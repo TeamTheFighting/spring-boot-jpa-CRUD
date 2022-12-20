@@ -14,10 +14,10 @@ public class PageController {
 
     @GetMapping("/login")
     public String loadLoginPage() {
-        return "recap_login";
+        return "login";
     }
 
-    @GetMapping("/home")
+    @GetMapping(value = { "/", "/home" })
     public String loadHomePage() {
         return "index";
     }

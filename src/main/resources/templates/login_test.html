@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input id="userId" type="text" placeholder="아이디를 입력하세요..." />
+    <input
+      id="userPassword"
+      type="text"
+      placeholder="비밀번호를 입력하세요..."
+    />
+    <button onclick="doLogin()">로그인</button>
+  </body>
+  <script
+    src="https://code.jquery.com/jquery-3.6.1.js"
+    integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI="
+    crossorigin="anonymous"
+  ></script>
+  <script>
+    function doLogin() {
+      //로그인 AJAX 구현해보기
+      let userId = $('#userId').val();
+      let userPassword = $('#userPassword').val();
+      var jsonData = {
+        userId: userId,
+        userPassword: userPassword,
+      };
+      console.log(jsonData);
+
+      $.ajax({
+        url: '/api/v1/login',
+        type: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify(jsonData),
+        dataType: 'json',
+        success: function (response) {
+          if (response) {
+            location.href = '/home';
+          }
+        },
+      });
+    }
+  </script>
+</html>

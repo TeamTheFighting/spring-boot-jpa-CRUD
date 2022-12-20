@@ -4,43 +4,205 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>로그인</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        background: linear-gradient(120deg, #2980b9, #8e44ad);
+        height: 100vh;
+        overflow: hidden;
+        box-sizing: border-box;
+      }
+
+      .container {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 400px;
+        background: white;
+        border-radius: 10px;
+      }
+
+      .container h1 {
+        text-align: center;
+        padding: 0 0 20px 0;
+        border-bottom: 1px solid silver;
+      }
+
+      .login-form {
+        padding: 0 40px;
+      }
+
+      .txt-field {
+        position: relative;
+        border-bottom: 2px solid #adadad;
+        margin: 30px 0;
+      }
+
+      .txt-field input {
+        width: 100%;
+        padding: 0 5px;
+        height: 40px;
+        font-size: 16px;
+        border: none;
+        outline: none;
+      }
+
+      .txt-field input:focus ~ label,
+      .txt-field input:valid ~ label {
+        top: -5px;
+        color: #2691d9;
+        transition: 0.5s;
+        font-size: 13px;
+      }
+
+      .txt-field label {
+        position: absolute;
+        top: 50%;
+        left: 5px;
+        color: #adadad;
+        transform: translateY(-50%);
+        font-size: 16px;
+        pointer-events: none;
+      }
+
+      .pass {
+        margin: -5px 0 20px 5px;
+        color: #a6a6a6;
+        cursor: pointer;
+      }
+
+      .pass:hover {
+        text-decoration: underline;
+      }
+
+      .login-btn {
+        width: 100%;
+        height: 50px;
+        border: 1px solid;
+        background: #2691d9;
+        border-radius: 25px;
+        font-size: 18px;
+        text-align: center;
+        color: white;
+        font-weight: 700;
+        cursor: pointer;
+        outline: none;
+        margin: 20px 0;
+      }
+
+      .signup-link {
+        margin: 30px 0;
+        text-align: center;
+        font-size: 16px;
+        color: #666666;
+      }
+
+      .signup-link a {
+        color: #2691d9;
+        text-decoration: none;
+      }
+
+      .signup-link a:hover {
+        text-decoration: underline;
+      }
+
+      .g-recaptcha {
+        margin: 20px 0;
+      }
+    </style>
   </head>
   <body>
-    <input id="userId" type="text" placeholder="아이디를 입력하세요..." />
-    <input
-      id="userPassword"
-      type="text"
-      placeholder="비밀번호를 입력하세요..."
-    />
-    <button onclick="doLogin()">로그인</button>
+    <div class="container">
+      <h1>Sign in to Spring 👨‍🦲</h1>
+      <div class="login-form">
+        <form id="loginForm" method="post" action="/login">
+          <div class="txt-field">
+            <input id="userId" name="userId" type="text" required />
+            <label>이름</label>
+          </div>
+          <div class="txt-field">
+            <input
+              id="userPassword"
+              name="userPassword"
+              type="password"
+              required
+            />
+            <label>비밀번호</label>
+          </div>
+          <div
+            id="captcha"
+            class="g-recaptcha"
+            data-sitekey="6LdKFngUAAAAAGC5tcJnfl7b9SJPdV-0V4rFglmK"
+            data-callback="recaptchaCallback"
+          ></div>
+          <input
+            onclick="doLogin()"
+            class="login-btn"
+            type="butten"
+            value="Sign in"
+          />
+        </form>
+      </div>
+    </div>
   </body>
   <script
-    src="https://code.jquery.com/jquery-3.6.1.js"
-    integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI="
+    src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
     crossorigin="anonymous"
   ></script>
-  <script>
-    function doLogin() {
-      //로그인 AJAX 구현해보기
-      let userId = $('#userId').val();
-      let userPassword = $('#userPassword').val();
-      var jsonData = {
-        userId: userId,
-        userPassword: userPassword,
-      };
-      console.log(jsonData);
+  <script src="https://www.google.com/recaptcha/api.js"></script>
+  <script type="text/javascript">
+    let isRecaptchachecked = false;
 
+    function recaptchaCallback() {
+      isRecaptchachecked = true;
+    }
+
+    function doLogin() {
+      if (!isRecaptchachecked) {
+        alert('리캡차 인증 체크를 해주세요.');
+        $('#recaptcha').focus();
+        return false;
+      }
+      var formData = $('#loginForm').serialize();
       $.ajax({
-        url: '/api/v1/login',
         type: 'POST',
-        contentType: 'application/json',
-        data: JSON.stringify(jsonData),
+        contentType: 'application/x-www-form-urlencoded',
+        url: '/api/v1/login2',
+        data: formData,
         dataType: 'json',
         success: function (response) {
           if (response) {
-            location.href = '/home';
+            alert('로그인!');
+            //doVaildRecaptcha();
+          } else {
+            alert('아이디 혹은 비밀번호 실패');
           }
+        },
+      });
+    }
+
+    //리캡차 인증 함수
+    function doVaildRecaptcha() {
+      var formData = $('#loginForm').serialize();
+      $.ajax({
+        type: 'POST',
+        contentType: 'application/x-www-form-urlencoded',
+        url: '/api/v1/valid-recaptcha',
+        data: formData,
+        dataType: 'json',
+        success: function (response) {
+          if (response) {
+            console.log(response);
+          } else {
+            alert('인증되지 않은 주소입니다.');
+          }
+        },
+        error: function (xhr, status, error) {
+          console.log(error);
         },
       });
     }
