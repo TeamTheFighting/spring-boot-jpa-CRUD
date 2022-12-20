@@ -171,12 +171,12 @@
       $.ajax({
         type: 'POST',
         contentType: 'application/x-www-form-urlencoded',
-        url: '/api/v1/login2',
+        url: '/api/v1/login',
         data: formData,
         dataType: 'json',
         success: function (response) {
           if (response) {
-            alert('로그인!');
+            location.href = '/home';
             //doVaildRecaptcha();
           } else {
             alert('아이디 혹은 비밀번호 실패');
