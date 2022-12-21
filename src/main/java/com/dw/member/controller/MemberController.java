@@ -85,6 +85,8 @@ public class MemberController {
 	public APIResponse<Page<Member>> callAllMembers(@RequestParam int offset, @RequestParam int pageSize,
 			@RequestParam String column) {
 
+		// pageSize : 한페이지에 몇개 보여줄지
+		// offset, pageSize === LIMIT offset, pageSize
 		Page<Member> members = repo
 				.findAll(PageRequest.of(offset, pageSize).withSort(Sort.by(column)));
 		int size = members.getSize();
