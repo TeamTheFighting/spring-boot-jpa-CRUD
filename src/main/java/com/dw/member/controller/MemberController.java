@@ -34,6 +34,7 @@ public class MemberController {
 	@Autowired
 	MainService service;
 
+	// JSON으로 보낼 때 @RequestBody로 받는다.
 	@PostMapping("/api/v1/login-test")
 	public boolean callLogin(@RequestBody Member member, HttpServletRequest request) {
 
@@ -47,7 +48,7 @@ public class MemberController {
 		}
 	}
 
-	// HTML에서 FROM 태그로 전송시 @ModelAttribute
+	// HTML에서 FROM 태그로 전송시 @ModelAttribute로 받는다.
 	@PostMapping(value = "/api/v1/login")
 	public boolean callLogin2(@ModelAttribute Member member, HttpServletRequest request) {
 		Member m = repo.findByuserIdAndUserPassword(member.getUserId(), member.getUserPassword());
@@ -130,15 +131,14 @@ public class MemberController {
 		return member;
 	}
 
+	// 리캡차 인증하는 controller 만들기
+	// FROM 태그로 데이터를 전송받는 방법 1. HttpServletRequest 사용
 	@PostMapping("/api/v1/valid-recaptcha")
 	public boolean validRecaptcha(HttpServletRequest request) {
-		boolean isResult = true;
 		String response = request.getParameter("g-recaptcha-response");
-		boolean isRecaptcha = service.verifyRecaptcha(response); // 인증 메소드 서비스로 분리
-		if (!isRecaptcha) {
-			isResult = false;
-		}
-		return isResult;
+		boolean isRecaptcha = service.verifyRecaptcha(response);
+		// 리캡차 인증 성공시 true, 실패시 false!
+		return isRecaptcha;
 	}
 
 }

@@ -132,6 +132,10 @@
             />
             <label>비밀번호</label>
           </div>
+          <!-- 
+            data-sitekey : 구글 리캡차(v2)에서 발급받은 사이트키 입력
+            data-callback : 리캡차를 실행할 자바스크립트 함수
+           -->
           <div
             id="captcha"
             class="g-recaptcha"
@@ -176,8 +180,8 @@
         dataType: 'json',
         success: function (response) {
           if (response) {
-            location.href = '/home';
-            //doVaildRecaptcha();
+            // location.href = '/home';
+            doVaildRecaptcha(); //리캡차 인증 함수
           } else {
             alert('아이디 혹은 비밀번호 실패');
           }
@@ -187,6 +191,16 @@
 
     //리캡차 인증 함수
     function doVaildRecaptcha() {
+      /*
+      프론트에서 백엔드로 데이터를 전송하는 방법. 
+      제이쿼리 AJAX를 이용.
+
+      전달 방법.
+      1. JSON 전송
+      2. FORM 전송
+
+      차이점 : contentType이 다르다.
+      */
       var formData = $('#loginForm').serialize();
       $.ajax({
         type: 'POST',
@@ -196,7 +210,7 @@
         dataType: 'json',
         success: function (response) {
           if (response) {
-            console.log(response);
+            location.href = '/home';
           } else {
             alert('인증되지 않은 주소입니다.');
           }

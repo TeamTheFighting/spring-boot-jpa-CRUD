@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class MainService {
 
+    // 자바에서 구글로 API 전송하는 로직
     public boolean verifyRecaptcha(String recaptcha) {
         final String SECRET_KEY = "6LdKFngUAAAAAMxkHeHKzBWVd2NJoRWb3sNt_2t9";
         final String RE_URL = "https://www.google.com/recaptcha/api/siteverify";// 리캡차 인증 주소
