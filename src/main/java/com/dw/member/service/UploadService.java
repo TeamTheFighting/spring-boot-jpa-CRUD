@@ -15,8 +15,8 @@ public class UploadService {
 
     public boolean uploadImageToAwsS3(MultipartFile[] locationFile){
         String today = new SimpleDateFormat("yyMMdd").format(new Date());
-        String imageBasePath="https://your_s3_name.s3.ap-northeast-2.amazonaws.com";//디비에 저장할 때 사용
-        String imagePath = "/upload/"+today;
+        String imageBasePath = "https://hyunsangwon.pro.s3.ap-northeast-2.amazonaws.com";//디비에 저장할 때 사용
+        String imagePath = "/upload/"+today; //이미지를 저장할 폴더
         String imageName = locationFile[0].getName()+".jpg";
         try{
             awsService.uploadObject(locationFile[0],imagePath,imageName);

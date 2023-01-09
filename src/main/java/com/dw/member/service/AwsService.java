@@ -20,6 +20,8 @@ public class AwsService {
 
     @Autowired
     private AmazonS3 s3Client;
+    
+    //aws.s3.bucket로 시작하는 yaml 설정값을 가져옴
     @Value("${aws.s3.bucket}")
     private String bucketName;
     

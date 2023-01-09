@@ -35,12 +35,18 @@ public class WebConfig implements WebMvcConfigurer {
     }
 
 
+    /*
+     * AWS에서 발급한 key가 맞는지 검사
+     */
     @Bean
 	public BasicAWSCredentials AwsCredentials() {
 		BasicAWSCredentials awsCreds = new BasicAWSCredentials(accessKey, secretKey);
 		return awsCreds;
 	}
 
+    /*
+     * AWS 위치 및 인증 체크
+     */
 	@Bean
 	public AmazonS3 AwsS3Client() {
 

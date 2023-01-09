@@ -59,13 +59,14 @@
     function fileUpload(){
         if(file != null){
             var data = new FormData();
+            //Controller에 RequestParam이름과 append key이름은 동일해야 함.
             data.append('image',file.files[0]);
             //파일업로드 ajax는 옵션이 다르다.
             $.ajax({
                 type : 'POST',
                 enctype: 'multipart/form-data',
                 url : '/api/v1/image',
-                 data: data,
+                data: data,
                 dataType: 'json',
                 processData: false,
                 contentType: false,
