@@ -13,12 +13,19 @@
         margin: 10px auto;
         background-color: #ececec;
     }
+    img{
+        width: 500px;
+        height: auto;
+    }
 </style>
 <body>
     <div class="container">
         <h3>파일 업로드 😎</h3>
         <label>파일업로드</label>
         <input id="img" type="file" name="img" onchange="fileCheck(this)" />
+        <div>
+            <img id="sampleImg" />
+        </div>
         <button type="button" onclick="fileUpload()">사진 업로드</button>
     </div>
 </body>
@@ -30,6 +37,7 @@
 <script>
     let file = null; 
 
+    //단일 파일업로드 함수
     function fileCheck(event) {
         const regFile = /(.*?)\.(jpg|jpeg|png|gif|bmp)$/;
         let fileName = event.files[0].name;
@@ -39,6 +47,13 @@
             return false;
         }
         file = event;
+        let reader = new FileReader();
+
+        reader.onload = function () {
+            let result = reader.result;
+            $('#sampleImg').attr('src',result);
+        };
+        reader.readAsDataURL(event.files[0]);
     }
 
     function fileUpload(){
