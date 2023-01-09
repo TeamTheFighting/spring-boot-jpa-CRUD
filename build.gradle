@@ -26,6 +26,9 @@ dependencies {
 	//리캡챠 v2
 	implementation 'javax.json:javax.json-api:1.1.2'
 	implementation 'org.glassfish:javax.json:1.1'
+	//AWS s3
+	implementation platform('com.amazonaws:aws-java-sdk-bom:1.11.228')
+	implementation 'com.amazonaws:aws-java-sdk-s3'
 }
 
 tasks.named('test') {

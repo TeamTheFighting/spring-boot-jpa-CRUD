@@ -17,6 +17,11 @@ public class PageController {
         return "login";
     }
 
+    @GetMapping("/upload")
+    public String loadUploadPage() {
+        return "upload";
+    }
+
     @GetMapping(value = { "/", "/home" })
     public String loadHomePage() {
         return "index";

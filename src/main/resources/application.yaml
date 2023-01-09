@@ -1,5 +1,21 @@
-## MYSQL
+application:
+  version: v0.0.1
+  title: Spring JPA
+
 spring:
+  profiles:
+    active: dev
+
+aws:
+  s3:
+    access-id: YOUR_ID
+    access-pw: YOUR_PW
+    bucket: YOUR_BUCKET
+
+---
+## 개발모드
+spring:
+  profiles: dev
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/dw_501
@@ -14,3 +30,19 @@ spring:
     properties:
       hibernate:
         format_sql: true
+
+---
+## 운영모드
+spring:
+  profiles: env
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/dw_501
+    username: root
+    password: tkddnjs0823
+  jpa:
+    database: mysql
+    generate-ddl: true
+    hibernate:
+      ddl-auto: none
+    show-sql: false

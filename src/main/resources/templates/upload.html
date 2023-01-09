@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .container{
+        width: 1200px;
+        height: 600px;
+        margin: 10px auto;
+        background-color: #ececec;
+    }
+</style>
+<body>
+    <div class="container">
+        <h3>파일 업로드 😎</h3>
+        <label>파일업로드</label>
+        <input id="img" type="file" name="img" onchange="fileCheck(this)" />
+        <button type="button" onclick="fileUpload()">사진 업로드</button>
+    </div>
+</body>
+<script
+      src="https://code.jquery.com/jquery-3.6.1.js"
+      integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI="
+      crossorigin="anonymous"
+    ></script>
+<script>
+    let file = null; 
+
+    function fileCheck(event) {
+        const regFile = /(.*?)\.(jpg|jpeg|png|gif|bmp)$/;
+        let fileName = event.files[0].name;
+
+        if(!regFile.test(fileName)){
+            alert('gif, jpg, png, jpeg 파일만 선택해 주세요. \n\n현재 파일 : ' + event.files[0].name);
+            return false;
+        }
+        file = event;
+    }
+
+    function fileUpload(){
+        if(file != null){
+            var data = new FormData();
+            data.append('image',file.files[0]);
+            //파일업로드 ajax는 옵션이 다르다.
+            $.ajax({
+                type : 'POST',
+                enctype: 'multipart/form-data',
+                url : '/api/v1/image',
+                 data: data,
+                dataType: 'json',
+                processData: false,
+                contentType: false,
+                success: function(data){
+                    alert('업로드 완료');
+                }
+            });
+        }
+    }
+</script>
+</html>
