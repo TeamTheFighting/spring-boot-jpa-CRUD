@@ -10,8 +10,7 @@ aws:
   s3:
     access-id: YOUR_ID
     access-pw: YOUR_PW
-    bucket: YOUR_BUCKET
-
+    bucket: hyunsangwon.pro
 ---
 ## 개발모드
 spring:
